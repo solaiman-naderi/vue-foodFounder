@@ -3,7 +3,7 @@
     <input
       type="text"
       placeholder="Search of meals"
-      class="rounded border-2 focus:outline-blue-400 py-2.5 px-4 border-gray-200 w-full"
+      class="border-2 focus:outline-blue-400 py-2.5 px-4 border-gray-200 w-full"
     />
     <div class="flex gap-2 mt-3">
       <RouterLink
@@ -17,12 +17,16 @@
   </div>
 </template>
 
-<script setup>
-import store from '@/stores'
-import { computed } from 'vue'
+<script setup lang="ts">
 import { letters } from '@/constants'
+import { useFetchApi } from '@/hooks/useFetchApi'
+import { onMounted, ref } from 'vue'
 
-const meals = computed(() => store.state.meals)
+const { items, loading, refresh } = useFetchApi('list.php?i=list')
+
+onMounted(async () => {
+  await refresh('list.php?i=list')
+})
 </script>
 
 <style scoped>
