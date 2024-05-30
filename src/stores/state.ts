@@ -1,3 +1,4 @@
 export default {
-  meals: ['Salmon']
+  meals: ['Salmon'],
+  searchedMeals: []
 }
